@@ -1,0 +1,148 @@
+@font-face {
+    font-family: Titulo;
+    src: url(../assets/fonts/Call\ of\ Ops\ Duty.otf);
+}
+
+h1 {
+    font-family: Titulo;
+    font-size: 40px;
+    color: olive;
+}
+
+body {
+    color: rgb(25, 138, 138);
+    background-image: url(../assets/image/2461.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+
+#container {
+    width: 950px;
+    height: auto;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#backgroundGame {
+    width: 950px;
+    height: 630px;
+    background-image: url(../assets/image/space-pixel-art-horizon-stars-wallpaper-preview.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: rgb(10, 78, 138);
+    border-style: solid;
+}
+
+#player {
+    width: 100px;
+    height: 66px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 8px;
+    top: 179px;
+    background-color: aqua;
+    background-image: url(../assets/image/player.png);
+}
+
+#enemies1 {
+    width: 55px;
+    height: 66px;
+    position: absolute;
+    left: 720px;
+    top: 253px;
+    transform: rotate(-90deg);
+    background-image: url(../assets/image/enemies1.png);
+    background-color: aqua;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#enemie2 {
+    width: 55px;
+    height: 66px;
+    position: absolute;
+    left: 775px;
+    top: 447px;
+    background-color: aqua;
+    transform: rotate(-90deg);
+    background-image: url(../assets/image/enemies1.png);
+}
+
+#ryan {
+    width: 44px;
+    height: 51px;
+    position: absolute;
+    left: 10px;
+    top: 464px;
+    background-color: aqua;
+    background-image: url();
+}
+
+#initiate {
+    width: 380px;
+    height: 240px;
+    background-color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    text-align: center;
+    padding: 10px;
+}
+
+
+.anima1 {
+    background-image: url();
+    animation:play .5s steps(2) infinite;
+
+    -webkit-animation: play .5s steps(10) infinite;
+}
+
+@keyframes play {
+    0% { background-image: url(../assets/image/move/survivor-move_shotgun_0.png); }
+    10% { background-image: url(../assets/image/move/survivor-move_shotgun_1.png);}
+    15% { background-image: url(../assets/image/move/survivor-move_shotgun_2.png);}
+    20% { background-image: url(../assets/image/move/survivor-move_shotgun_3.png);}
+    25% { background-image: url(../assets/image/move/survivor-move_shotgun_4.png);}
+    30% { background-image: url(../assets/image/move/survivor-move_shotgun_5.png);}
+    35% { background-image: url(../assets/image/move/survivor-move_shotgun_6.png);}
+    40% { background-image: url(../assets/image/move/survivor-move_shotgun_7.png);}
+    45% { background-image: url(../assets/image/move/survivor-move_shotgun_8.png);}
+    50% { background-image: url(../assets/image/move/survivor-move_shotgun_9.png);}
+    55% { background-image: url(../assets/image/move/survivor-move_shotgun_10.png);}
+    60% { background-image: url(../assets/image/move/survivor-move_shotgun_11.png);}
+    65% { background-image: url(../assets/image/move/survivor-move_shotgun_12.png);}
+    70% { background-image: url(../assets/image/move/survivor-move_shotgun_13.png);}
+    75% { background-image: url(../assets/image/move/survivor-move_shotgun_14.png);}
+    80% { background-image: url(../assets/image/move/survivor-move_shotgun_15.png);}
+    85% { background-image: url(../assets/image/move/survivor-move_shotgun_16.png);}
+    90% { background-image: url(../assets/image/move/survivor-move_shotgun_17.png);}
+    95% { background-image: url(../assets/image/move/survivor-move_shotgun_18.png);}
+    100% { background-image: url(../assets/image/move/survivor-move_shotgun_19.png);}
+}
+
+@-webkit-keyframes play {
+    0% { background-image: url(../assets/image/move/survivor-move_shotgun_0.png); }
+    10% { background-image: url(../assets/image/move/survivor-move_shotgun_1.png);}
+    15% { background-image: url(../assets/image/move/survivor-move_shotgun_2.png);}
+    20% { background-image: url(../assets/image/move/survivor-move_shotgun_3.png);}
+    25% { background-image: url(../assets/image/move/survivor-move_shotgun_4.png);}
+    30% { background-image: url(../assets/image/move/survivor-move_shotgun_5.png);}
+    35% { background-image: url(../assets/image/move/survivor-move_shotgun_6.png);}
+    40% { background-image: url(../assets/image/move/survivor-move_shotgun_7.png);}
+    45% { background-image: url(../assets/image/move/survivor-move_shotgun_8.png);}
+    50% { background-image: url(../assets/image/move/survivor-move_shotgun_9.png);}
+    55% { background-image: url(../assets/image/move/survivor-move_shotgun_10.png);}
+    60% { background-image: url(../assets/image/move/survivor-move_shotgun_11.png);}
+    65% { background-image: url(../assets/image/move/survivor-move_shotgun_12.png);}
+    70% { background-image: url(../assets/image/move/survivor-move_shotgun_13.png);}
+    75% { background-image: url(../assets/image/move/survivor-move_shotgun_14.png);}
+    80% { background-image: url(../assets/image/move/survivor-move_shotgun_15.png);}
+    85% { background-image: url(../assets/image/move/survivor-move_shotgun_16.png);}
+    90% { background-image: url(../assets/image/move/survivor-move_shotgun_17.png);}
+    95% { background-image: url(../assets/image/move/survivor-move_shotgun_18.png);}
+    100% { background-image: url(../assets/image/move/survivor-move_shotgun_19.png);}
+}
