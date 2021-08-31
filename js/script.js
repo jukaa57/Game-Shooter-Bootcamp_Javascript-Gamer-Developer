@@ -5,9 +5,18 @@ function start() {
     $("#backgroundGame").append("<div id='enemies1' class='moveEnemies'></div>");
     $("#backgroundGame").append("<div id='enemies2' class='moveEnemies'></div>");
     $("#backgroundGame").append("<div id='enemies3' class='moveEnemies'></div>");
+    $("#backgroundGame").append("<div id='wall'</div>")
     $("#backgroundGame").append("<div id='ammo'></div>");
+    $("#backgroundGame").append("<div id='information'</div>")
+    $("#backgroundGame").append("<div id='life'</div>")
 
 
+    let information = {
+        life: 5,
+        lifeWall: 6,
+        bullet: 20,
+        dead:0
+    };
     let gameOver = false;
     let velocity1 = parseInt(Math.random()*6);
     if (velocity1 <= 3) velocity1 = 4;
@@ -26,7 +35,6 @@ function start() {
     }
     
     game.pressed = [];
-
     $(document).keydown(function(e){
         game.pressed[e.which] = true;
     });
@@ -34,8 +42,6 @@ function start() {
     $(document).keyup(function(e){
         game.pressed[e.which] = false;
     });
-    
-
     game.timer = setInterval( loop, 30 );
 
     function loop() {
@@ -44,11 +50,42 @@ function start() {
         movePlayer();
         moveAmmo();
         collision();
+        informations();
+        lifeWall();
     }
     
     function moveBackground() {
         left = parseInt($("#backgroundGame").css("background-position"));
         $("#backgroundGame").css("background-position", left-1)
+    }
+
+    function informations() {
+        $('#information').html("<h2> Life: " + information.life + " Bullets: " + information.bullet + " Dead: " + information.dead + "</h2>")
+    }
+
+
+    function lifeWall() {
+        if(information.lifeWall == 6) {
+            $("#life").css("background-image", "url(../assets/image/LifeFull.png)");
+        }
+            
+        if(information.lifeWall == 5)
+            $("#life").css("background-image", "url(../assets/image/Life5.png)");
+
+        if(information.lifeWall == 4)
+            $("#life").css("background-image", "url(../assets/image/Life4.png)");
+        
+        if(information.lifeWall == 3)
+            $("#life").css("background-image", "url(../assets/image/Life3.png)");
+        
+        if(information.lifeWall == 2)
+            $("#life").css("background-image", "url(../assets/image/Life2.png)");
+        if(information.lifeWall == 1)
+            $("#life").css("background-image", "url(../assets/image/Life1.png)");
+        else
+            $("#life").css("background-image", "url(../assets/image/Lifenull.png)");
+        
+        
     }
 
     function moveAmmo() {
@@ -99,9 +136,8 @@ function start() {
         if (left1 <= 0) {
             velocity1 = parseInt(Math.random()*6);
             if (velocity1 <= 3) velocity1 = 5;
-
             positionY = parseInt(Math.random()*540);
-            $("#enemies1").css("left",953);
+            $("#enemies1").css("left",900);
             $("#enemies1").css("top",positionY);
         }
     }
@@ -110,9 +146,8 @@ function start() {
         if (left2 <= 0) {
             velocity2 = parseInt(Math.random()*7);
             if (velocity2 <= 3) velocity2 = 5;
-
             positionY = parseInt(Math.random()*540);
-            $("#enemies2").css("left",953);
+            $("#enemies2").css("left",900);
             $("#enemies2").css("top",positionY);
         }
     }
@@ -121,9 +156,8 @@ function start() {
         if (left3 <= 0) {
             velocity3 = parseInt(Math.random()*8);
             if (velocity3 <= 3) velocity3 = 4;
-
             positionY = parseInt(Math.random()*540);
-            $("#enemies3").css("left",953);
+            $("#enemies3").css("left",900);
             $("#enemies3").css("top",positionY);
         }
     }
@@ -134,14 +168,15 @@ function start() {
             if (velocity1 <= 3) velocity1 = 6;
 
             positionY = parseInt(Math.random()*520);
-            $("#ammo").css("left",953);
+            $("#ammo").css("left",910);
             $("#ammo").css("top",positionY);
 
         }
     }
 
     function fire() {
-        if (fireB == true) {
+        if (fireB == true && information.bullet > 0) {
+            information.bullet -=1
             fireB = false;""
             upB = parseInt($('#player').css('top'));
             leftB = parseInt($('#player').css('left'));
@@ -180,8 +215,14 @@ function start() {
             }
         }
     }
+    if($("enimies1").css("left") <= 0 ) {
+        information.life--
+    }
 
     function collision() {
+        let collisionWall1 =($("#wall").collision($("#enemies1")));
+        let collisionWall2 =($("#wall").collision($('#enemies2')));
+        let collisionWall3 =($("#wall").collision($('#enemies3')));
         let collision1 = ($('#player').collision($('#enemies1')));
         let collision2 = ($('#player').collision($('#enemies2')));
         let collision3 = ($('#player').collision($('#enemies3')));
@@ -191,19 +232,22 @@ function start() {
         let collisionB4 = ($('#fire').collision($('#ammo')));
         let collisionAmmo = ($('#player').collision($('#ammo')));
 
-        if (collision1.length > 0) {
+        if (collision1.length > 0 || collisionWall1.length > 0) {
+            information.life--
             positionY = parseInt(Math.random()*540);
             $("#enemies1").css("left",953);
             $("#enemies1").css("top",positionY);
         }
 
-        if (collision2.length > 0) {
+        if (collision2.length > 0 || collisionWall2.length > 0) {
+            information.life--
             positionY = parseInt(Math.random()*540);
             $("#enemies2").css("left",953);
             $("#enemies2").css("top",positionY);
         }
         
-        if (collision3.length > 0) {
+        if (collision3.length > 0 || collisionWall3.length > 0) {
+            information.life--
             positionY = parseInt(Math.random()*540);
             $("#enemies3").css("left",953);
             $("#enemies3").css("top",positionY);
@@ -211,6 +255,7 @@ function start() {
         }
 
         if (collisionB1.length > 0) {  
+            information.dead++;
             positionY = parseInt(Math.random()*540);
             $("#enemies1").css("left",953);
             $("#enemies1").css("top",positionY);
@@ -218,6 +263,7 @@ function start() {
         }
 
         if (collisionB2.length > 0) {  
+            information.dead++;
             positionY = parseInt(Math.random()*540);
             $("#enemies2").css("left",953);
             $("#enemies2").css("top",positionY);
@@ -225,26 +271,31 @@ function start() {
         }
 
         if (collisionB3.length > 0) {  
+            information.dead++;
             positionY = parseInt(Math.random()*540);
             $("#enemies3").css("left",953);
             $("#enemies3").css("top",positionY);
             $('#fire').css("left", 950)
         }
 
-        if (collisionB4.length > 0) {  
+        if (collisionB4.length > 0) {
+            information.bullet += parseInt(Math.random()*20) 
+            if(information.bullet <= 3) information.bullet = 4
             $('#ammo').css('display', 'none');
             $('#fire').css("left", 950)
             respawnTimePunish();
         }
 
         if (collisionAmmo.length > 0) {  
+            information.bullet += parseInt(Math.random()*15) 
+            if(information.bullet <= 5) information.bullet = 8
            $('#ammo').css('display', 'none');
            timeRespawnAmmo();
         }
     }
 
     function timeRespawnAmmo() {
-        let timeReload = window.setInterval(respawnB, 7000);
+        let timeReload = window.setInterval(respawnB, 6000);
         function respawnB() {
             $('#ammo').css('display', 'block');
             window.clearInterval(timeReload);
@@ -262,7 +313,4 @@ function start() {
             if(gameOver == false) respawnAmmo()
         }
     }
-
 }
-
-
