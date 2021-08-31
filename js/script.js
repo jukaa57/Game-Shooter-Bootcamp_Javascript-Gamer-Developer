@@ -10,21 +10,20 @@ function start() {
 
     let velocity1 = parseInt(Math.random()*6);
     if (velocity1 <= 3) velocity1 = 4;
-
     let velocity2 = parseInt(Math.random()*7);
     if (velocity2 <= 3) velocity2 = 4;
-
     let velocity3 = parseInt(Math.random()*8);
     if (velocity3 <= 3) velocity2 = 4;
 
     let positionY = parseInt(Math.random()*600);
-
+    let fireB = true;
     const game = {};
     const key = {
         W: 87,
         S: 83,
         D: 68
     }
+    
     game.pressed = [];
 
     $(document).keydown(function(e){
@@ -43,6 +42,7 @@ function start() {
         moveEnemies(); 
         movePlayer();
         moveAmmo();
+        collision();
     }
     
     function moveBackground() {
@@ -67,7 +67,7 @@ function start() {
 
         left3 = parseInt($("#enemies3").css("left"));
         $("#enemies3").css("left", left3-velocity3);
-        respawEnemie3()
+        respawEnemie3();
     }
 
     function movePlayer() {
@@ -90,7 +90,7 @@ function start() {
         }
 
         if ( game.pressed[key.D] ) {
-           
+           fire();
         }
     }
 
@@ -139,4 +139,103 @@ function start() {
         }
     }
 
+    function fire() {
+        if (fireB == true) {
+            fireB = false;
+
+            upB = parseInt($('#player').css('top'));
+            leftB = parseInt($('#player').css('left'));
+            fireX = leftB + 120;
+            fireUp = upB + 51;
+            $('#backgroundGame').append("<div id='fire'></div>");
+            $('#fire').css("top",fireUp);
+            $('#fire').css("left", fireX);
+        
+            muzzle(leftB,upB)
+            var timeBullet = window.setInterval(fireNow, 30);
+        }
+
+        function fireNow() {
+            leftB = parseInt($('#fire').css('left'));
+            $('#fire').css('left', leftB + 15);
+
+            if (leftB > 900) {
+                window.clearInterval(timeBullet);
+                timeBullet = null;
+                $('#fire').remove();
+                fireB = true
+            }
+        }
+       
+    }
+
+    function muzzle(mX, mY) {
+        $('#backgroundGame').append('<div id="muzzle"></div>');
+       
+        var div = $('#muzzle'); //aliases of $('#muzzle') 
+        div.css('top', mY + 50);
+        div.css('left', mX + 112);
+        var timeMuzzle = window.setInterval(removeMuzzle, 60);
+            function removeMuzzle() {
+                div.remove();
+                window.clearInterval(timeMuzzle);
+                timeMuzzle = null;
+
+            }
+    }
+
+    function collision() {
+        let collision1 = ($('#player').collision($('#enemies1')));
+        let collision2 = ($('#player').collision($('#enemies2')));
+        let collision3 = ($('#player').collision($('#enemies3')));
+        let collisionB1 = ($('#fire').collision($('#enemies1')));
+        let collisionB2 = ($('#fire').collision($('#enemies2')));
+        let collisionB3 = ($('#fire').collision($('#enemies3')));
+        let collisionAmmo = ($('#player').collision($('#ammo')));
+
+        if (collision1.length > 0) {
+            positionY = parseInt(Math.random()*540);
+            $("#enemies1").css("left",953);
+            $("#enemies1").css("top",positionY);
+        }
+
+        if (collision2.length > 0) {
+            positionY = parseInt(Math.random()*540);
+            $("#enemies2").css("left",953);
+            $("#enemies2").css("top",positionY);
+        }
+        
+        if (collision3.length > 0) {
+            positionY = parseInt(Math.random()*540);
+            $("#enemies3").css("left",953);
+            $("#enemies3").css("top",positionY);
+        }
+
+        if (collisionB1.length > 0) {  
+            positionY = parseInt(Math.random()*540);
+            $("#enemies1").css("left",953);
+            $("#enemies1").css("top",positionY);
+        }
+
+        if (collisionB2.length > 0) {  
+            positionY = parseInt(Math.random()*540);
+            $("#enemies2").css("left",953);
+            $("#enemies2").css("top",positionY);
+        }
+
+        if (collisionB3.length > 0) {  
+            positionY = parseInt(Math.random()*540);
+            $("#enemies3").css("left",953);
+            $("#enemies3").css("top",positionY);
+        }
+
+        if (collisionAmmo.length > 0) {  
+            positionY = parseInt(Math.random()*540);
+            $("#ammo").css("left",953);
+            $("#ammo").css("top",positionY);
+        }
+
+    }
 }
+
+

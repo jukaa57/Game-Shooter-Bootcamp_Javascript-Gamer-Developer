@@ -11,7 +11,7 @@ h1 {
 
 body {
     color: rgb(25, 138, 138);
-    background-image: url(../assets/image/2461.jpg);
+    background-image: url(../assets/image/246.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -45,7 +45,7 @@ body {
     position: absolute;
     left: 8px;
     top: 179px;
-    /* background-color: aqua; */
+    background-color: rgb(93, 0, 255);
     background-image: url(../assets/image/player.png);
     background-position: center;
 }
@@ -103,6 +103,24 @@ body {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+#fire {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-image: url(../assets/image/bullet_1.png);
+    background-position: center;
+    background-size: cover;
+    transform: rotate(90deg);
+    background-color: brown;
+}
+
+#muzzle {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-color: yellow;
 }
 
 #initiate {
