@@ -8,6 +8,7 @@ function start() {
     $("#backgroundGame").append("<div id='ammo'></div>");
 
 
+    let gameOver = false;
     let velocity1 = parseInt(Math.random()*6);
     if (velocity1 <= 3) velocity1 = 4;
     let velocity2 = parseInt(Math.random()*7);
@@ -53,21 +54,21 @@ function start() {
     function moveAmmo() {
         left = parseInt($("#ammo").css("left"));
         $("#ammo").css("left", left-velocity1);
-        respawAmmo()
+        respawnAmmo()
     }
 
     function moveEnemies() {
         left1 = parseInt($("#enemies1").css("left"));
         $("#enemies1").css("left", left1-velocity1);
-        respawEnemie1()
+        respawnEnemie1()
 
         left2 = parseInt($("#enemies2").css("left"));
         $("#enemies2").css("left", left2-velocity2);
-        respawEnemie2()
+        respawnEnemie2()
 
         left3 = parseInt($("#enemies3").css("left"));
         $("#enemies3").css("left", left3-velocity3);
-        respawEnemie3();
+        respawnEnemie3();
     }
 
     function movePlayer() {
@@ -94,10 +95,10 @@ function start() {
         }
     }
 
-    function respawEnemie1() {
+    function respawnEnemie1() {
         if (left1 <= 0) {
             velocity1 = parseInt(Math.random()*6);
-            if (velocity1 <= 3) velocity1 += 4;
+            if (velocity1 <= 3) velocity1 = 5;
 
             positionY = parseInt(Math.random()*540);
             $("#enemies1").css("left",953);
@@ -105,10 +106,10 @@ function start() {
         }
     }
     
-    function respawEnemie2() {
+    function respawnEnemie2() {
         if (left2 <= 0) {
             velocity2 = parseInt(Math.random()*7);
-            if (velocity2 <= 3) velocity2 += 4;
+            if (velocity2 <= 3) velocity2 = 5;
 
             positionY = parseInt(Math.random()*540);
             $("#enemies2").css("left",953);
@@ -116,10 +117,10 @@ function start() {
         }
     }
 
-    function respawEnemie3() {
+    function respawnEnemie3() {
         if (left3 <= 0) {
             velocity3 = parseInt(Math.random()*8);
-            if (velocity3 <= 3) velocity3 += 4;
+            if (velocity3 <= 3) velocity3 = 4;
 
             positionY = parseInt(Math.random()*540);
             $("#enemies3").css("left",953);
@@ -127,10 +128,10 @@ function start() {
         }
     }
 
-    function respawAmmo() {
+    function respawnAmmo() {
         if (left <= 0) {
-            velocity1 = parseInt(Math.random()*6);
-            if (velocity1 <= 3) velocity1 += 4;
+            velocity1 = parseInt(Math.random()*8);
+            if (velocity1 <= 3) velocity1 = 6;
 
             positionY = parseInt(Math.random()*520);
             $("#ammo").css("left",953);
@@ -141,8 +142,7 @@ function start() {
 
     function fire() {
         if (fireB == true) {
-            fireB = false;
-
+            fireB = false;""
             upB = parseInt($('#player').css('top'));
             leftB = parseInt($('#player').css('left'));
             fireX = leftB + 120;
@@ -166,22 +166,19 @@ function start() {
                 fireB = true
             }
         }
-       
-    }
 
-    function muzzle(mX, mY) {
-        $('#backgroundGame').append('<div id="muzzle"></div>');
-       
-        var div = $('#muzzle'); //aliases of $('#muzzle') 
-        div.css('top', mY + 50);
-        div.css('left', mX + 112);
-        var timeMuzzle = window.setInterval(removeMuzzle, 60);
+        function muzzle(mX, mY) {
+            $('#backgroundGame').append('<div id="muzzle"></div>');
+            var div = $('#muzzle'); //aliases of $('#muzzle') 
+            div.css('top', mY + 48);
+            div.css('left', mX + 112);
+            var timeMuzzle = window.setInterval(removeMuzzle, 60);
             function removeMuzzle() {
                 div.remove();
                 window.clearInterval(timeMuzzle);
                 timeMuzzle = null;
-
             }
+        }
     }
 
     function collision() {
@@ -191,6 +188,7 @@ function start() {
         let collisionB1 = ($('#fire').collision($('#enemies1')));
         let collisionB2 = ($('#fire').collision($('#enemies2')));
         let collisionB3 = ($('#fire').collision($('#enemies3')));
+        let collisionB4 = ($('#fire').collision($('#ammo')));
         let collisionAmmo = ($('#player').collision($('#ammo')));
 
         if (collision1.length > 0) {
@@ -209,33 +207,62 @@ function start() {
             positionY = parseInt(Math.random()*540);
             $("#enemies3").css("left",953);
             $("#enemies3").css("top",positionY);
+            
         }
 
         if (collisionB1.length > 0) {  
             positionY = parseInt(Math.random()*540);
             $("#enemies1").css("left",953);
             $("#enemies1").css("top",positionY);
+            $('#fire').css("left", 950)
         }
 
         if (collisionB2.length > 0) {  
             positionY = parseInt(Math.random()*540);
             $("#enemies2").css("left",953);
             $("#enemies2").css("top",positionY);
+            $('#fire').css("left", 950)
         }
 
         if (collisionB3.length > 0) {  
             positionY = parseInt(Math.random()*540);
             $("#enemies3").css("left",953);
             $("#enemies3").css("top",positionY);
+            $('#fire').css("left", 950)
+        }
+
+        if (collisionB4.length > 0) {  
+            $('#ammo').css('display', 'none');
+            $('#fire').css("left", 950)
+            respawnTimePunish();
         }
 
         if (collisionAmmo.length > 0) {  
-            positionY = parseInt(Math.random()*540);
-            $("#ammo").css("left",953);
-            $("#ammo").css("top",positionY);
+           $('#ammo').css('display', 'none');
+           timeRespawnAmmo();
         }
-
     }
+
+    function timeRespawnAmmo() {
+        let timeReload = window.setInterval(respawnB, 7000);
+        function respawnB() {
+            $('#ammo').css('display', 'block');
+            window.clearInterval(timeReload);
+            timeReload = null;
+            if(gameOver == false) respawnAmmo()
+        }
+    }
+
+    function respawnTimePunish() {
+        let timeReload = window.setInterval(respawnA, 10000);
+        function respawnA() {
+            $('#ammo').css('display', 'block');
+            window.clearInterval(timeReload);
+            timeReload = null;
+            if(gameOver == false) respawnAmmo()
+        }
+    }
+
 }
 
 

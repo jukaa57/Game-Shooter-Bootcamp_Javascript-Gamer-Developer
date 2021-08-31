@@ -6,7 +6,8 @@
 h1 {
     font-family: Titulo;
     font-size: 40px;
-    color: olive;
+    color: rgb(133, 133, 128);
+    text-shadow: rgb(179, 36, 36) 3px 2px;
 }
 
 body {
@@ -26,12 +27,23 @@ body {
     margin-right: auto;
 }
 
+#initiate {
+    width: 380px;
+    height: 240px;
+    background-color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    text-align: center;
+    padding: 10px;
+}
+
 #backgroundGame {
     width: 950px;
     height: 630px;
-    background-image: url(../assets/image/space-pixel-art-horizon-stars-wallpaper-preview.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-image: url(../assets/image/backgrounddetailed5.png);
+    background-repeat: repeat-x;
+    background-size: contain;
     border-color: rgb(10, 78, 138);
     border-style: solid;
 }
@@ -41,11 +53,9 @@ body {
     width: 85px;
     height: 35px;
     background-size: cover;
-    background-repeat: no-repeat;
     position: absolute;
     left: 8px;
     top: 179px;
-    background-color: rgb(93, 0, 255);
     background-image: url(../assets/image/player.png);
     background-position: center;
 }
@@ -54,13 +64,11 @@ body {
     width: 100px;
     height: 90px;
     position: absolute;
-    left: 620px;
+    left: -1px;
     top: 253px;
     transform: rotate(-180deg);
-    background-color: aqua;
     background-image: url(../assets/image/export/skeleton-move_0.png);
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
 }
 
@@ -68,27 +76,23 @@ body {
     width: 100px;
     height: 90px;
     position: absolute;
-    left: 775px;
+    left: -100px;
     top: 447px;
-    background-color: rgb(33, 230, 46);
     transform: rotate(-180deg);
     background-image: url(../assets/image/export/skeleton-move_0.png);
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
 }
 
 #enemies3 {
     width: 100px;
     height: 90px;
     position: absolute;
-    left: 620px;
+    left: -100px;
     top: 540px;
     transform: rotate(-180deg);
-    background-color: rgb(255, 0, 217);
     background-image: url(../assets/image/export/skeleton-move_0.png);
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
 }
 
@@ -96,9 +100,8 @@ body {
     width: 34px;
     height: 39px;
     position: absolute;
-    left: 100px;
+    left: -100px;
     top: 464px;
-    background-color: red;
     background-image: url(../assets/image/ammo.png);
     background-size: contain;
     background-position: center;
@@ -113,31 +116,19 @@ body {
     background-position: center;
     background-size: cover;
     transform: rotate(90deg);
-    background-color: brown;
 }
 
 #muzzle {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
+    background-image: url(../assets/image/muzzle.png);
+    background-position: center;
+    background-size: cover;
     position: absolute;
-    background-color: yellow;
 }
-
-#initiate {
-    width: 380px;
-    height: 240px;
-    background-color: aliceblue;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    text-align: center;
-    padding: 10px;
-}
-
 
 .movePlayer {
     animation:movePlayer .5s steps(2) infinite;
-
     -webkit-animation: movePlayer .5s steps(2) infinite;
 }
 
@@ -189,7 +180,6 @@ body {
 
 .moveEnemies {
     animation:moveEnemies .6s steps(3) infinite;
-
     -webkit-animation: moveEnemies .6s steps(3) infinite;
 }
 
