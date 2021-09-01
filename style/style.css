@@ -54,6 +54,17 @@ body {
     position: absolute;
     left: 5px;
     top: 590px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#bullets {
+
+    position: absolute;
+    left: 180px;
+    top: 560px;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(7, 250, 36);
 }
 
 h2 {
@@ -70,15 +81,13 @@ h2 {
     top: -99%;
     margin-left: auto;
     margin-right: auto;
-    /* background-size: contain;
-    background-repeat: no-repeat; */
-    
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 #wall {
     width: 10px;
     height: 630px;
-    background-color: rgba(28, 28, 28, 0.085);
 }
 
 #player {
@@ -97,7 +106,7 @@ h2 {
     width: 100px;
     height: 90px;
     position: absolute;
-    left: -1px;
+    left: 900px;
     top: 253px;
     transform: rotate(-180deg);
     background-image: url(../assets/image/export/skeleton-move_0.png);
@@ -109,7 +118,7 @@ h2 {
     width: 100px;
     height: 90px;
     position: absolute;
-    left: -100px;
+    left: 900px;
     top: 447px;
     transform: rotate(-180deg);
     background-image: url(../assets/image/export/skeleton-move_0.png);
@@ -121,7 +130,7 @@ h2 {
     width: 100px;
     height: 90px;
     position: absolute;
-    left: -100px;
+    left: 900px;
     top: 540px;
     transform: rotate(-180deg);
     background-image: url(../assets/image/export/skeleton-move_0.png);
@@ -254,4 +263,30 @@ h2 {
     85% { background-image: url(../assets/image/export/skeleton-move_14.png);}
     90% { background-image: url(../assets/image/export/skeleton-move_15.png);}
     100% { background-image: url(../assets/image/export/skeleton-move_16.png);}
+}
+
+#end {
+    width: 350px;
+    height: 210px;
+    background-color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: #00000066 4px 5px 5px 1px;
+}
+
+#end h3 {
+    font-family: Titulo;
+    font-size: 20px;
+    color: #032060;
+    cursor: pointer;
+}
+
+#end p {
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 40px;
 }
